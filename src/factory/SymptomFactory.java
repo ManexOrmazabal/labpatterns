@@ -60,5 +60,18 @@ public class SymptomFactory {
         }
         return symptom;
     }
+    public static Symptom[] getAllSymptoms() {
+        // Crear una lista con todos los nombres de síntomas
+        List<String> allSymptomNames = Arrays.asList(
+            "fiebre", "tos seca", "astenia", "expectoracion",
+            "disnea", "dolor de garganta", "cefalea", "mialgia", "escalofrios",
+            "nauseas", "vómitos", "congestión nasal", "diarrea", "hemoptisis", "mareos"
+        );
+
+        // Crear un arreglo de síntomas utilizando createSymptom
+        return allSymptomNames.stream()
+            .map(SymptomFactory::createSymptom)
+            .toArray(Symptom[]::new);
+    }
 }
 

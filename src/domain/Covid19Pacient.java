@@ -5,8 +5,9 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
+import java.util.Observable; // Importa Observable
 
-public class Covid19Pacient {
+public class Covid19Pacient extends Observable { // Extiende Observable
     private String name;
     private int age;
     private Map<Symptom, Integer> symptoms = new HashMap<>();
@@ -55,14 +56,22 @@ public class Covid19Pacient {
         Symptom s = getSymptomByName(symptomName);
         if (s == null) {
             s = SymptomFactory.createSymptom(symptomName);  // Usamos la fábrica
-            if (s != null) symptoms.put(s, w);
+            if (s != null) {
+                symptoms.put(s, w);
+                setChanged(); // Marca el estado como cambiado
+                notifyObservers(); // Notifica a los observadores
+            }
         }
         return s;
     }
 
     public Symptom removeSymptomByName(String symptomName) {
         Symptom s = getSymptomByName(symptomName);
-        if (s != null) symptoms.remove(s);
+        if (s != null) {
+            symptoms.remove(s);
+            setChanged(); // Marca el estado como cambiado
+            notifyObservers(); // Notifica a los observadores
+        }
         return s;
     }
 
@@ -90,5 +99,6 @@ public class Covid19Pacient {
         return impact;
     }
 }
+
 
 

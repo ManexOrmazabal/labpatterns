@@ -1,37 +1,41 @@
 package observer;
 
+import javax.swing.*;
+
+import domain.Covid19Pacient;
+import domain.Symptom;
+
+import java.awt.*;
 import java.util.Iterator;
 import java.util.Observable;
 import java.util.Observer;
 
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
+public class PacientObserverGUI extends JFrame implements Observer {
+    private JLabel symptomLabel; // Asegúrate de que este campo esté presente
 
-import domain.Symptom;
+    public PacientObserverGUI(Observable obs) {
+        setTitle("Patient Symptoms");
+        setSize(400, 300);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        symptomLabel = new JLabel("No symptoms yet");
+        add(symptomLabel, BorderLayout.CENTER);
+        setVisible(true);
+        obs.addObserver(this); // Suscribir este objeto al Observable
+    }
 
-import javax.swing.JLabel;
+    @Override
+    public void update(Observable o, Object arg) {
+        Covid19Pacient p = (Covid19Pacient) o; // Casting
+        String s = "<html> Pacient: <b>" + p.getName() + "</b> <br>";
+        s += "Covid impact: <b>" + p.covidImpact() + "</b><br><br>";
+        s += " _____________________ <br> Symptoms: <br>";
 
-public class PacientObserverGUI extends JFrame{
-
-	private JPanel contentPane;
-	private final JLabel symptomLabel = new JLabel("");
-
-	/**
-	 * Create the frame.
-	 */
-	public PacientObserverGUI() {
-		setTitle("Pacient symptoms");
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(650, 100, 200, 300);
-		contentPane = new JPanel();
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		setContentPane(contentPane);
-		contentPane.setLayout(null);
-		symptomLabel.setBounds(19, 38, 389, 199);
-		contentPane.add(symptomLabel);
-		symptomLabel.setText("Still no symptoms");
-		this.setVisible(true);
-	}
-
+        Iterator<Symptom> i = p.getSymptoms().iterator();
+        while (i.hasNext()) {
+            Symptom p2 = i.next();
+            s += " - " + p2.toString() + ", " + p.getWeight(p2) + "<br>";
+        }
+        s += "</html>";
+        symptomLabel.setText(s); // Actualiza la etiqueta
+    }
 }
