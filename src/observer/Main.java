@@ -23,6 +23,8 @@ public class Main {
         PacientThermometerGUI thermometerGUI1 = new PacientThermometerGUI(pacient1);
         PacientThermometerGUI thermometerGUI2 = new PacientThermometerGUI(pacient2);
         
+        SemaphorGUI semaphorGUI1 = new SemaphorGUI(pacient1);
+        SemaphorGUI semaphorGUI2 = new SemaphorGUI(pacient2);
         
     }
 }
