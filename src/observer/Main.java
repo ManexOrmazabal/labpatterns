@@ -19,6 +19,11 @@ public class Main {
         // Crear interfaces para actualizar síntomas
         PacientSymptomGUI symptomGUI1 = new PacientSymptomGUI(pacient1);
         PacientSymptomGUI symptomGUI2 = new PacientSymptomGUI(pacient2);
+        
+        PacientThermometerGUI thermometerGUI1 = new PacientThermometerGUI(pacient1);
+        PacientThermometerGUI thermometerGUI2 = new PacientThermometerGUI(pacient2);
+        
+        
     }
 }
 	
