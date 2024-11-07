@@ -48,9 +48,10 @@ public class PacientSymptomGUI extends JFrame {
 
         // Campo de texto para el peso del síntoma
         weightField = new JTextField();
-        weightField.setBounds(195, 91, 130, 26);
+        weightField.setBounds(195, 91, 130, 25);
         contentPane.add(weightField);
         weightField.setColumns(10);
+        
 
         // Botón "Add Symptom"
         addButton = new JButton("Add Symptom");
